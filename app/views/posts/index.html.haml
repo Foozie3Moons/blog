@@ -1,19 +1,13 @@
-%h1 Listing posts
-= paginate @posts
-
 %h1 Posts
-- @posts.each do |post|
-  %h2= post.title
-  %p
-    = post.body
-  %blockquote
-    %span author:
-    = post.user.email
-  - if current_user == post.user
-    %ul
-      %li= link_to 'Edit', edit_post_path(post)
-      %li= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
-
-%hr/
 = paginate @posts
 = page_entries_info @posts
+%hr
+- @posts.each do |post|
+  %h2= post.title
+  %small
+    = post.user.name
+    %span @
+    = post.created_at
+  %p
+    = link_to 'Show', post_path(post)
+  %hr
