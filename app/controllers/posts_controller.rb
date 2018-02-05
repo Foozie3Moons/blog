@@ -20,6 +20,10 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
+    if current_user != @post.user
+      redirect_to '/posts/' + @post.id + '/'
+    end
   end
 
   # POST /posts
